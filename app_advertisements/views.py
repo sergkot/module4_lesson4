@@ -8,12 +8,13 @@ def index(request):
     # return HttpResponse('Успешно')
     return render(request, 'index.html')
 
+
 def top_sellers(request):
     # return HttpResponse('Успешно')
     return render(request, 'top-sellers.html')
 
-def test_page(request):
 
+def test_page(request):
     return render(request, 'test_page_static.html')
     # mylist = [f for f in glob.glob("*.*")]
     # return render(request, 'test_page_static.html')
