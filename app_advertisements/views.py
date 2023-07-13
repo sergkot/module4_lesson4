@@ -21,6 +21,14 @@ def register(request):
     # return HttpResponse('Успешно')
     return render(request, 'register.html')
 
+def login(request):
+    # return HttpResponse('Успешно')
+    return render(request, 'login.html')
+
+def profile(request):
+    # return HttpResponse('Успешно')
+    return render(request, 'profile.html')
+
 
 def test_page(request):
     return render(request, 'test_page_static.html')
