@@ -13,6 +13,14 @@ def top_sellers(request):
     # return HttpResponse('Успешно')
     return render(request, 'top-sellers.html')
 
+def advertisement_post(request):
+    # return HttpResponse('Успешно')
+    return render(request, 'advertisement-post.html')
+
+def register(request):
+    # return HttpResponse('Успешно')
+    return render(request, 'register.html')
+
 
 def test_page(request):
     return render(request, 'test_page_static.html')
