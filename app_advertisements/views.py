@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Advertisements
 from django.http import HttpResponse
 import glob
 import os
@@ -6,7 +7,9 @@ import os
 
 def index(request):
     # return HttpResponse('Успешно')
-    return render(request, 'index.html')
+    advertisements = Advertisements.objects.all()
+    context = {'advertisements': advertisements}
+    return render(request, 'index.html', context)
 
 
 def top_sellers(request):
