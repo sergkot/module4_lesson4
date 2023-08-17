@@ -7,8 +7,9 @@ from advertisement.settings import MEDIA_ROOT
 
 User = get_user_model()
 
+
 class Advertisements(models.Model):
-    title = models.CharField("Заголовок",max_length=128)
+    title = models.CharField("Заголовок", max_length=128)
     description = models.TextField("Описание")
     price = models.DecimalField("Цена", max_digits=17, decimal_places=2)
     auction = models.BooleanField("Торг", help_text="Отметьте, если торг уместен")
@@ -19,7 +20,7 @@ class Advertisements(models.Model):
     image = models.ImageField('Изображение', upload_to='advertisements/')
 
     def __str__(self):
-        return(f"id={self.id}, title={self.title}, description={self.description}, price={self.price}")
+        return (f"id={self.id}, title={self.title}, description={self.description}, price={self.price}")
 
     class Meta:
         db_table = "advertisements"
@@ -49,17 +50,21 @@ class Advertisements(models.Model):
         return self.update_at.strftime('%d.%m.%Y в %H:%M:%S')
 
     # Вариант1 вывода картинки в админку
-    @admin.display(description='Изображение')
+    @admin.display(description='Фото')
     def image_display(self):
-        #http://127.0.0.1:8000/media/advertisements/%D0%91%D0%BE%D1%87%D0%BA%D0%B0.jpg
+        # http://127.0.0.1:8000/media/advertisements/%D0%91%D0%BE%D1%87%D0%BA%D0%B0.jpg
         # print(self.image.name)
         # return(self.image.name)
         media_str = '/media/'
         if self.image:
-            return format_html('<img src="{}" style="max-width:200px; max-height:200px"/>'.format(media_str + self.image.name))
+            # return format_html(
+            #     '<img src="{}" style="max-width:200px; max-height:200px"/>'.format(media_str + self.image.name))
+            print(f'url of picture for admin: {self.image.url}')
+            return format_html(
+                 '<img src="{url}" style="max-width:200px; max-height:200px;">', url=self.image.url)
             # return mark_safe(f'<img src = "/media/{self.image.name}" width = "200"/>')
         else:
-            return('')
+            return ('')
 
     # Вариант2 вывода картинки в админку
     def img_preview(self):  # new
@@ -68,3 +73,7 @@ class Advertisements(models.Model):
             return mark_safe(f'<img src = "{media_str + self.image.name}" style="max-width:200px; max-height:200px"/>')
         else:
             return ''
+
+
+if __name__ == '__main__':
+    a = 1
