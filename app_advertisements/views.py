@@ -37,14 +37,15 @@ def top_sellers(request):
 
 def advertisement(request):
     # return HttpResponse('Успешно')
-    id = int(request.GET.get("id"))
-    print(f'id from url {id}')
-    for adv in Advertisements.objects.all():
-        if adv.id == id:
-            break
-    # adv = Advertisements.objects.all()
-    context = {'adv': adv, 'id_adv': id}
-    return render(request, 'advertisement.html', context)
+    id = int(request.GET.get("id", -1))
+    if id != -1:
+        print(f'id from url {id}')
+        for adv in Advertisements.objects.all():
+            if adv.id == id:
+                break
+        # adv = Advertisements.objects.all()
+        context = {'adv': adv, 'id_adv': id}
+        return render(request, 'advertisement.html', context)
 
 def register(request):
     # return HttpResponse('Успешно')
