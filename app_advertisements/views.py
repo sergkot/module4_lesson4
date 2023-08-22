@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Advertisements
 from .forms import AdvertisementsForm
-from django.urls import  reverse
+from django.urls import reverse
 from django.http import HttpResponse
 import glob
 import os
@@ -13,6 +13,7 @@ def index(request):
     context = {'advertisements': advertisements, 'pictures': 'blablabla'}
     return render(request, 'index.html', context)
 
+
 def advertisement_post(request):
     if request.method == 'POST':
         form = AdvertisementsForm(request.POST, request.FILES)
@@ -20,19 +21,27 @@ def advertisement_post(request):
             advertisement = Advertisements(**form.cleaned_data)
             advertisement.user = request.user
             advertisement.save()
-            url = reverse('main-page')
+            url = reverse('advertisement-post')
             return redirect(url)
+            #########
+            # try:
+            #     advertisement.save()
+            #     url = reverse('main-page')
+            #     return redirect(url)
+            # except ValueError as ve:
+            #     return ve
+        else:
+            return render(request, 'advertisement-post.html', {'form': form})
     else:
         # advertisements = Advertisements.objects.all()
         context = {'form': AdvertisementsForm, 'var1': 'variable test'}
-        #print(f'cont: {context}')
+        # print(f'cont: {context}')
         return render(request, 'advertisement-post.html', context)
 
 
 def top_sellers(request):
     # return HttpResponse('Успешно')
     return render(request, 'top-sellers.html')
-
 
 
 def advertisement(request):
@@ -47,13 +56,16 @@ def advertisement(request):
         context = {'adv': adv, 'id_adv': id}
         return render(request, 'advertisement.html', context)
 
+
 def register(request):
     # return HttpResponse('Успешно')
     return render(request, 'register.html')
 
+
 def login(request):
     # return HttpResponse('Успешно')
     return render(request, 'login.html')
+
 
 def profile(request):
     # return HttpResponse('Успешно')
@@ -74,6 +86,8 @@ def test_page(request):
     #     file_data = f.read()
     # print(file_data)
     # return HttpResponse(file_data, content_type='html')
+
+
 # Create your views here.
 
 if __name__ == '__main__':
