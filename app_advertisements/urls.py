@@ -11,10 +11,10 @@ urlpatterns = [
     path('advertisement-post/', advertisement_post, name='advertisement-post'),
     path('advertisement/', advertisement, name='advertisement'),
 
-    path('register/', register, name='register'),
-    path('login/', login, name='login'),
-    path('register/', login, name='register'),
-    path('profile/', profile, name='profile'),
+
+
+    # path('register/', register, name='register'),
+    # path('login/', login, name='login'),
     #path('admin/', admin.site.urls),
 ]
 #<int:id>
