@@ -10,6 +10,7 @@ def profile_view(request):
 
 def login_view(request):
     ttt = 'abcde'
+
     redirect_url = reverse('profile')
     if request.method == "GET":
         if request.user.is_authenticated:
